@@ -87,7 +87,7 @@ def eval_model(model, dataloader):
     accuracy = (sum(predictions == labels)/predictions.size)
     return loss, accuracy
 
-def train_fold(model_ckpt, train_df, val_df, save_model_ckpt='./save_model_ckpt'):
+def train_fold(model_ckpt, train_df, val_df, save_model_ckpt):
     """
     1. Create model -> model.to(device)
     2. Create dataloader(train_dataloader, val_dataloader)
