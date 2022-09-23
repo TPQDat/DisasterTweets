@@ -26,7 +26,7 @@ class Dataset(Dataset):
         encoding['attention_mask'] = torch.tensor(encoding['attention_mask']).flatten()
         if self.is_label:
             label = self.df['target'].values[index]
-            label = np.array(label)
+            label = np.array([label])
             return {'input_ids': encoding['input_ids'],
                     'attention_mask': encoding['attention_mask'],
                     'label': torch.tensor(label)}
