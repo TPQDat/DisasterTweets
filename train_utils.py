@@ -43,9 +43,9 @@ def train_epoch(model, dataloader, optimizer):
 
         optimizer.step()
 
-        targets = targets.numpy()
+        targets = targets.cpu().numpy()
         labels = np.atleast_1d(targets) if labels is None else np.concatenate([labels, np.atleast_1d(targets)])
-        outputs = outputs.numpy()
+        outputs = outputs.cpu().numpy()
         predictions = np.atleast_1d(outputs) if predictions is None else np.concatenate([predictions, np.atleast_1d(outputs)])
 
     loss = np.mean(losses)
@@ -74,12 +74,12 @@ def eval_model(model, dataloader):
 
         outputs = model(input_ids=input_ids, attention_mask=attention_mask)
 
-        loss = F.binary_cross_entropy(outputs, targets)
+        loss = F.binary_cross_entropy(outputs, targets.float())
         losses.append(loss.item())
 
-        targets = targets.numpy()
+        targets = targets.cpu().numpy()
         labels = np.atleast_1d(targets) if labels is None else np.concatenate([labels, np.atleast_1d(targets)])
-        outputs = outputs.numpy()
+        outputs = outputs.cpu().numpy()
         predictions = np.atleast_1d(outputs) if predictions is None else np.concatenate([predictions, np.atleast_1d(outputs)])
 
     loss = np.mean(losses)
