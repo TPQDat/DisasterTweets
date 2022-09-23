@@ -50,7 +50,10 @@ def train_epoch(model, dataloader, optimizer):
 
     loss = np.mean(losses)
     predictions = 1*(predictions > CFG.threshold)
-    accuracy = (sum(predictions == labels)/predictions.size)
+    accuracy = (sum(predictions == labels))/predictions.size
+    print()
+    print('accuracy: ', accuracy)
+    print('loss: ', loss)
     return loss, accuracy
 
 def eval_model(model, dataloader):
@@ -84,7 +87,7 @@ def eval_model(model, dataloader):
 
     loss = np.mean(losses)
     predictions = 1*(predictions > CFG.threshold)
-    accuracy = (sum(predictions == labels)/predictions.size)
+    accuracy = (sum(predictions == labels))/predictions.size
     return loss, accuracy
 
 def train_fold(model_ckpt, train_df, val_df, save_model_ckpt):
