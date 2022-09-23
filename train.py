@@ -38,5 +38,5 @@ if __name__ == '__main__':
     if not os.path.exists(args.save_path):
         os.mkdir(args.save_path)
 
-    main('Start')
+    main()
 
