@@ -13,7 +13,7 @@ import transformers
 
 transformers.logging.set_verbosity_error()
 
-def main(*args):
+def main():
     """
     1. Read data -> DataFrame
     2. Split train_df, val_df
