@@ -49,9 +49,10 @@ def train_epoch(model, dataloader, optimizer):
         predictions = np.atleast_1d(outputs) if predictions is None else np.concatenate([predictions, np.atleast_1d(outputs)])
 
     loss = np.mean(losses)
+    labels = labels.reshape(labels.size)
+    predictions = predictions.reshape(predictions.size)
     predictions = 1*(predictions > CFG.threshold)
     accuracy = sum(predictions == labels)/predictions.size
- 
     return loss, accuracy
 
 def eval_model(model, dataloader):
@@ -84,6 +85,8 @@ def eval_model(model, dataloader):
         predictions = np.atleast_1d(outputs) if predictions is None else np.concatenate([predictions, np.atleast_1d(outputs)])
 
     loss = np.mean(losses)
+    labels = labels.reshape(labels.size)
+    predictions = predictions.reshape(predictions.size)
     predictions = 1*(predictions > CFG.threshold)
     accuracy = sum(predictions == labels)/predictions.size
     return loss, accuracy
