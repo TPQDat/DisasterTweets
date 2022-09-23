@@ -36,7 +36,8 @@ def train_epoch(model, dataloader, optimizer):
 
         optimizer.zero_grad()
         outputs = model(input_ids=input_ids, attention_mask=attention_mask)
-
+        print('outputs: ', outputs)
+        print('target: ', targets)
         loss = F.binary_cross_entropy(outputs, targets)
         losses.append(loss.item())
         loss.backward()
