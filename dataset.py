@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import torch
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer
@@ -25,6 +26,7 @@ class Dataset(Dataset):
         encoding['attention_mask'] = torch.tensor(encoding['attention_mask']).flatten()
         if self.is_label:
             label = self.df['target'].values[index]
+            label = np.array(label)
             return {'input_ids': encoding['input_ids'],
                     'attention_mask': encoding['attention_mask'],
                     'label': torch.tensor(label)}
@@ -36,8 +38,8 @@ def create_dataloader(df, tokenizer, batch_size=CFG.batch_size, is_train=True, i
     dataset = Dataset(df, tokenizer, is_label)
     return DataLoader(dataset, batch_size, shuffle=True if is_train else False)
 
-if __name__ == '__main__':
-    train_df = pd.read_csv('./data/train.csv')
-    tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-    data = create_dataloader(train_df, tokenizer)
-    print(data)
+# if __name__ == '__main__':
+#     train_df = pd.read_csv('./data/train.csv')
+#     tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+#     data = create_dataloader(train_df, tokenizer)
+#     print(data)
