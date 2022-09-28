@@ -32,6 +32,7 @@ if __name__ == '__main__':
     model_ckpt = args.model_ckpt
 
     print(f'Seed: {CFG.seed}')
+    print('Backbone: ', args.model_ckpt)
     seed_everything(CFG.seed)
 
     if not os.path.exists(args.save_path):
