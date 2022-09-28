@@ -21,8 +21,7 @@ def main():
     """
     df = pd.read_csv('./data/train.csv')
     train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, shuffle=True)
-    model_ckpt = 'bert-base-uncased'
-    train_fold(model_ckpt=model_ckpt, train_df=train_df, val_df=val_df, save_model_ckpt=args.save_path)
+    train_fold(model_ckpt=args.model_ckpt, train_df=train_df, val_df=val_df, save_model_ckpt=args.save_path)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Argument Parser for Training Model')
